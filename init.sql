@@ -1,8 +1,3 @@
-CREATE DATABASE Payslip_db;
-
-\c Payslip_db
-
-
 CREATE TABLE IF NOT EXISTS payslips (
     id SERIAL PRIMARY KEY,
     employee_id VARCHAR(7) NOT NULL CHECK (employee_id ~ '^ATS0(?!000)\d{3}$'),
