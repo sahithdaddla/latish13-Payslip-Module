@@ -1,0 +1,61 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:14
+    container_name: payslip_pg
+    ports:
+      - "5516:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: payslip_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - payslip-net
+
+  backend:
+    build: ./Backend
+    container_name: payslip_backend
+    ports:
+      - "3089:3089"
+    environment:
+      DB_USER: postgres
+      DB_PASSWORD: admin123
+      DB_NAME: payslip_db
+      DB_HOST: postgres
+      DB_PORT: 5432
+      PORT: 3089
+    depends_on:
+      - postgres
+    networks:
+      - payslip-net
+
+  employee_payslip:
+    build: ./Employee_Payslip
+    container_name: employee_payslip_ui
+    ports:
+      - "8316:80"
+    depends_on:
+      - backend
+    networks:
+      - payslip-net
+
+  hr_payslip:
+    build: ./HR_Payslip
+    container_name: hr_payslip_ui
+    ports:
+      - "8317:80"
+    depends_on:
+      - backend
+    networks:
+      - payslip-net
+
+volumes:
+  pgdata:
+
+networks:
+  payslip-net:
+

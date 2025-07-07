@@ -30,3 +30,5 @@ CREATE INDEX idx_employee_id ON payslips (employee_id);
 CREATE INDEX idx_month_year ON payslips (month_year);
 CREATE INDEX idx_created_at ON payslips (created_at);
 
+
+
