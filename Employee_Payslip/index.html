@@ -516,7 +516,7 @@
 
             // Check if page is loaded via file:// protocol
             if (window.location.protocol === 'file:') {
-                showNotification('error', 'This application must be run via the server. Please open http://localhost:3000/Employee_Payslip instead of the local file.');
+                showNotification('error', 'This application must be run via the server. Please open http://16.171.200.23:3089/Employee_Payslip instead of the local file.');
                 const logoImg = document.querySelector('.company-logo');
                 logoImg.src = 'https://placehold.co/180x100?text=Logo';
                 console.log('Forced placeholder due to file:// protocol:', logoImg.src);
@@ -544,7 +544,7 @@
             });
             logoImg.addEventListener('error', function(event) {
                 console.error('Logo failed to load:', logoImg.src, 'Error:', event);
-                showNotification('error', 'Failed to load logo. Using placeholder image. Please ensure the server is running and access via http://localhost:3000/Employee_Payslip.');
+                showNotification('error', 'Failed to load logo. Using placeholder image. Please ensure the server is running and access via http://16.171.200.23:3089/Employee_Payslip.');
                 logoImg.src = 'https://placehold.co/180x100?text=Logo';
                 console.log('Switched to placeholder:', logoImg.src);
             });
@@ -646,7 +646,7 @@
                     const year = document.getElementById('year').value;
 
                     try {
-                        const response = await fetch('http://localhost:3000/api/payslips?employeeId=' + employeeId + '&month=' + month + '&year=' + year);
+                        const response = await fetch('http://16.171.200.23:3089/api/payslips?employeeId=' + employeeId + '&month=' + month + '&year=' + year);
                         if (!response.ok) {
                             throw new Error((await response.json()).error || 'Failed to fetch payslip');
                         }
