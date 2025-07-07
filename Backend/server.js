@@ -351,5 +351,5 @@ pool.on('error', (err, client) => {
 
 // Start the server
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+    console.log(`Server running on http://13.60.88.230:${port}`);
 });
